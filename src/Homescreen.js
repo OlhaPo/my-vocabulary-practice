@@ -1,11 +1,11 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import "./App.css";
+import Container from "@mui/material/Container";
 
-export default function App() {
+export default function Homescreen() {
   return (
-    <Box className="App" sx={{ height: "100%" }}>
+    <Container className="Homescreen">
       <Box
         className="NavigationButtons"
         sx={{
@@ -15,15 +15,20 @@ export default function App() {
           justifyContent: "center",
           flexDirection: "column",
           height: "100%",
+          mt: "100px",
         }}
       >
-        <Button variant="outlined" size="large">
+        <Button
+          variant="outlined"
+          size="large"
+          sx={{ mb: "40px", width: "50%" }}
+        >
           Практика
         </Button>
-        <Button variant="outlined" size="large">
+        <Button variant="outlined" size="large" sx={{ width: "50%" }}>
           Словник
         </Button>
       </Box>
-    </Box>
+    </Container>
   );
 }

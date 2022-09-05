@@ -2,9 +2,3 @@
   font-family: Roboto, Helvetica, sans-serif;
   height: 100vh;
 } */
-
-.App button {
-  display: flex;
-  margin-top: 40px;
-  justify-content: center;
-}
