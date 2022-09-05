@@ -42,7 +42,6 @@ export default function WordOverview() {
         "& > :not(style)": {
           mt: "100px",
           width: "600px",
-          height: "300px",
           p: "20px 30px",
         },
       }}
