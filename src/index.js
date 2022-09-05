@@ -7,9 +7,9 @@ import Container from "@mui/material/Container";
 import Homescreen from "./Homescreen";
 import Practice from "./Practice";
 import FlashCard from "./FlashCard";
-import Vocabulary from "./Vocabulary";
+// import Vocabulary from "./Vocabulary";
 import WordOverview from "./WordOverview";
-import EditWordForm from "./EditWordForm";
+// import EditWordForm from "./EditWordForm";
 import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -22,9 +22,9 @@ root.render(
           <Route path="/" element={<Homescreen />} />
           <Route path="practice" element={<Practice />} />
           <Route path="flashcard" element={<FlashCard />} />
-          <Route path="vocabulary" element={<Vocabulary />} />
+          {/* <Route path="vocabulary" element={<Vocabulary />} /> */}
           <Route path="word" element={<WordOverview />} />
-          <Route path="edit" element={<EditWordForm />} />
+          {/* <Route path="edit" element={<EditWordForm />} /> */}
         </Routes>
         {/* <App sx={{ bgcolor: "#cfe8fc", height: "100%" }} /> */}
       </BrowserRouter>
