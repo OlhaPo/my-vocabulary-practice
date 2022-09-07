@@ -3,6 +3,9 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const paper = (
   <Box>
@@ -34,19 +37,25 @@ const paper = (
 
 export default function WordOverview() {
   return (
-    <Box
-      className="WordOverview"
-      sx={{
-        display: "flex",
-        flexWrap: "wrap",
-        "& > :not(style)": {
-          mt: "100px",
-          width: "600px",
-          p: "20px 30px",
-        },
-      }}
-    >
-      <Paper elevation={3}>{paper}</Paper>
-    </Box>
+    <Container className="WordOverview">
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          "& > :not(style)": {
+            mt: "100px",
+            width: "600px",
+            p: "20px 30px",
+          },
+        }}
+      >
+        <Paper elevation={3}>{paper}</Paper>
+      </Box>
+      <Box sx={{ fontSize: "60px", textAlign: "left", mt: "40px" }}>
+        <Button variant="text">
+          <ArrowBackIcon sx={{ fontSize: "40px" }} />
+        </Button>
+      </Box>
+    </Container>
   );
 }
