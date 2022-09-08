@@ -10,7 +10,12 @@ export default function Practice() {
     padding: theme.spacing(1),
   }));
   return (
-    <Box className="Practice" sx={{ height: "100%" }}>
+    <Box
+      className="Practice"
+      sx={{
+        mt: "120px",
+      }}
+    >
       <Box
         sx={{
           display: "flex",

@@ -3,9 +3,11 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import EditIcon from "@mui/icons-material/Edit";
 
 const paper = (
   <Box>
@@ -51,10 +53,20 @@ export default function WordOverview() {
       >
         <Paper elevation={3}>{paper}</Paper>
       </Box>
-      <Box sx={{ fontSize: "60px", textAlign: "left", mt: "40px" }}>
-        <Button variant="text">
-          <ArrowBackIcon sx={{ fontSize: "40px" }} />
-        </Button>
+      <Box sx={{ fontSize: "60px", mt: "30px" }}>
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Button>
+            <ArrowBackIcon sx={{ fontSize: "30px" }} />
+          </Button>
+          <Button>
+            <EditIcon sx={{ fontSize: "30px" }} />
+          </Button>
+        </Grid>
       </Box>
     </Container>
   );

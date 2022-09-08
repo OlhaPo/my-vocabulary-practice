@@ -58,9 +58,9 @@ export default function FlashCard() {
         >
           {card}
         </Card>
-        <Box sx={{ fontSize: "60px", textAlign: "right", mt: "20px" }}>
+        <Box sx={{ fontSize: "60px", textAlign: "right" }}>
           <Button variant="text">
-            <ArrowForwardIcon sx={{ fontSize: "40px" }} />
+            <ArrowForwardIcon sx={{ fontSize: "30px" }} />
           </Button>
         </Box>
       </Box>
