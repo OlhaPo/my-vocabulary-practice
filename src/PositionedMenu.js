@@ -44,11 +44,11 @@ export default function PositionedMenu() {
         }}
         sx={{ mt: "30px", ml: "20px" }}
       >
-        <MenuItem onClick={handleClose} component={Link} to="/vocabulary">
-          Словник
-        </MenuItem>
         <MenuItem onClick={handleClose} component={Link} to="/practice">
           Практика
+        </MenuItem>
+        <MenuItem onClick={handleClose} component={Link} to="/vocabulary">
+          Словник
         </MenuItem>
       </Menu>
     </Box>
