@@ -4,6 +4,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
 import Box from "@mui/material/Box";
+import { Link } from "react-router-dom";
 
 export default function PositionedMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -43,8 +44,12 @@ export default function PositionedMenu() {
         }}
         sx={{ mt: "30px", ml: "20px" }}
       >
-        <MenuItem onClick={handleClose}>Словник</MenuItem>
-        <MenuItem onClick={handleClose}>Практика</MenuItem>
+        <MenuItem onClick={handleClose} component={Link} to="/vocabulary">
+          Словник
+        </MenuItem>
+        <MenuItem onClick={handleClose} component={Link} to="/practice">
+          Практика
+        </MenuItem>
       </Menu>
     </Box>
   );

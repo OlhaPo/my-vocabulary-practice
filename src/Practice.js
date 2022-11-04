@@ -2,6 +2,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 
 export default function Practice() {
   const Div = styled("div")(({ theme }) => ({
@@ -28,6 +29,8 @@ export default function Practice() {
       >
         <Div sx={{ p: "20px", fontSize: 18 }}>Практика</Div>
         <Button
+          component={Link}
+          to={"/Flashcard"}
           variant="outlined"
           size="large"
           sx={{ m: "20px 0", width: "50%" }}
