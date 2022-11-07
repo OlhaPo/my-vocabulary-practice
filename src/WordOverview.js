@@ -8,6 +8,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import EditIcon from "@mui/icons-material/Edit";
+import { Link } from "react-router-dom";
 
 const paper = (
   <Box>
@@ -60,10 +61,10 @@ export default function WordOverview() {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Button>
+          <Button component={Link} to={"/vocabulary"}>
             <ArrowBackIcon sx={{ fontSize: "30px" }} />
           </Button>
-          <Button>
+          <Button component={Link} to={"/edit/:id"}>
             <EditIcon sx={{ fontSize: "30px" }} />
           </Button>
         </Grid>

@@ -23,8 +23,8 @@ root.render(
           <Route path="practice" element={<Practice />} />
           <Route path="flashcard" element={<FlashCard />} />
           <Route path="vocabulary" element={<Vocabulary />} />
-          <Route path="word" element={<WordOverview />} />
-          <Route path="edit" element={<EditWordForm />} />
+          <Route path="word/:id" element={<WordOverview />} />
+          <Route path="edit/:id" element={<EditWordForm />} />
         </Routes>
         {/* <App sx={{ bgcolor: "#cfe8fc", height: "100%" }} /> */}
       </BrowserRouter>

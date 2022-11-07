@@ -13,6 +13,34 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
+import { Link } from "react-router-dom";
+
+const data = [
+  {
+    id: 1,
+    value_ua: "pies",
+    value_pl: "собака",
+    description: "",
+  },
+  {
+    id: 2,
+    value_ua: "kot",
+    value_pl: "кіт",
+    description: "",
+  },
+  {
+    id: 3,
+    value_ua: "tygrys",
+    value_pl: "тигр",
+    description: "",
+  },
+  {
+    id: 4,
+    value_ua: "lew",
+    value_pl: "лев",
+    description: "",
+  },
+];
 
 const columns = [
   { id: "word", label: "Слово", minWidth: 170 },
@@ -20,16 +48,21 @@ const columns = [
   { id: "edit", label: "", minWidth: 50, align: "right" },
 ];
 
-function createData(word, translation, edit) {
-  return { word, translation, edit };
+function createData(row) {
+  return {
+    word: <Link to={"/word/" + row.id}>{row.value_ua}</Link>,
+    translation: <Link to={"/word/" + row.id}>{row.value_pl}</Link>,
+    edit: (
+      <Button component={Link} to={"/edit/" + row.id}>
+        <EditIcon />
+      </Button>
+    ),
+  };
 }
 
-const rows = [
-  createData("Pies", "собака", <EditIcon />),
-  createData("Kot", "кіт", <EditIcon />),
-  createData("Tygrys", "тигр", <EditIcon />),
-  createData("Lew", "лев", <EditIcon />),
-];
+const rows = data.map((row) => {
+  return createData(row);
+});
 
 export default function Vocabulary() {
   const Div = styled("div")(({ theme }) => ({
@@ -52,7 +85,7 @@ export default function Vocabulary() {
   return (
     <Container className="Vocabulary">
       <Div sx={{ p: "20px", fontSize: 18, mt: "100px", textAlign: "center" }}>
-        Практика
+        Словник
       </Div>
       <Paper
         sx={{
@@ -127,7 +160,7 @@ export default function Vocabulary() {
         />
       </Paper>
       <Box sx={{ fontSize: "60px", textAlign: "right" }}>
-        <Button variant="text">
+        <Button component={Link} to={"/edit/:id"} variant="text">
           <AddIcon sx={{ fontSize: "30px" }} />
         </Button>
       </Box>

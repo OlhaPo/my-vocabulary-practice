@@ -28,7 +28,13 @@ export default function Homescreen() {
         >
           Практика
         </Button>
-        <Button variant="outlined" size="large" sx={{ width: "50%" }}>
+        <Button
+          component={Link}
+          to={"/vocabulary"}
+          variant="outlined"
+          size="large"
+          sx={{ width: "50%" }}
+        >
           Словник
         </Button>
       </Box>

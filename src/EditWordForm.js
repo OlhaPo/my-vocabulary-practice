@@ -7,6 +7,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ClearIcon from "@mui/icons-material/Clear";
 import Container from "@mui/material/Container";
 import DoneIcon from "@mui/icons-material/Done";
+import { Link } from "react-router-dom";
 
 export default function EditWordForm() {
   return (
@@ -56,14 +57,26 @@ export default function EditWordForm() {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Button variant="outlined" startIcon={<DeleteForeverIcon />}>
+          <Button
+            component={Link}
+            to={"/vocabulary"}
+            variant="outlined"
+            startIcon={<DeleteForeverIcon />}
+          >
             Delete
           </Button>
           <Grid>
-            <Button variant="outlined" startIcon={<ClearIcon />}>
+            <Button
+              component={Link}
+              to={"/vocabulary"}
+              variant="outlined"
+              startIcon={<ClearIcon />}
+            >
               Cancel
             </Button>
             <Button
+              component={Link}
+              to={"/word/:id"}
               variant="outlined"
               sx={{
                 ml: "20px",
