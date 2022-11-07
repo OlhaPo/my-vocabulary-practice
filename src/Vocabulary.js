@@ -54,8 +54,13 @@ export default function Vocabulary() {
       <Div sx={{ p: "20px", fontSize: 18, mt: "100px", textAlign: "center" }}>
         Практика
       </Div>
-      <Paper sx={{ width: "100%", border: " 1px solid #3D82D3" }}>
-        <TableContainer sx={{ maxHeight: 440 }}>
+      <Paper
+        sx={{
+          width: "100%",
+          border: " 1px solid #3D82D3",
+        }}
+      >
+        <TableContainer sx={{ maxHeight: 440, borderRadius: "4px" }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
