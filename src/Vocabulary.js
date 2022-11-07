@@ -50,8 +50,22 @@ const columns = [
 
 function createData(row) {
   return {
-    word: <Link to={"/word/" + row.id}>{row.value_ua}</Link>,
-    translation: <Link to={"/word/" + row.id}>{row.value_pl}</Link>,
+    word: (
+      <Link
+        style={{ textDecoration: "none", color: "#000000" }}
+        to={"/word/" + row.id}
+      >
+        {row.value_ua}
+      </Link>
+    ),
+    translation: (
+      <Link
+        style={{ textDecoration: "none", color: "#000000" }}
+        to={"/word/" + row.id}
+      >
+        {row.value_pl}
+      </Link>
+    ),
     edit: (
       <Button component={Link} to={"/edit/" + row.id}>
         <EditIcon />
