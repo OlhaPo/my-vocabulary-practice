@@ -8,8 +8,21 @@ import ClearIcon from "@mui/icons-material/Clear";
 import Container from "@mui/material/Container";
 import DoneIcon from "@mui/icons-material/Done";
 import { Link } from "react-router-dom";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogTitle from "@mui/material/DialogTitle";
 
 export default function EditWordForm() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <Container className="EditWordForm">
       <Box
@@ -57,14 +70,42 @@ export default function EditWordForm() {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Button
-            component={Link}
-            to={"/vocabulary"}
-            variant="outlined"
-            startIcon={<DeleteForeverIcon />}
-          >
-            Delete
-          </Button>
+          <div>
+            <Button
+              variant="outlined"
+              startIcon={<DeleteForeverIcon />}
+              onClick={handleClickOpen}
+            >
+              Delete
+            </Button>
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle
+                id="alert-dialog-title"
+                sx={{
+                  fontWeight: "400",
+                  fontSize: "17px",
+                }}
+              >
+                {"Видалити слово зі словника?"}
+              </DialogTitle>
+              <DialogActions>
+                <Button
+                  component={Link}
+                  to={"/vocabulary"}
+                  onClick={handleClose}
+                  autoFocus
+                >
+                  Так
+                </Button>
+                <Button onClick={handleClose}>Ні</Button>
+              </DialogActions>
+            </Dialog>
+          </div>
           <Grid>
             <Button
               component={Link}
