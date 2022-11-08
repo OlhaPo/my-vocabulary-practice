@@ -13,14 +13,23 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 
 export default function EditWordForm() {
-  const [open, setOpen] = React.useState(false);
+  const [openDeleteButton, setOpenDeleteButton] = React.useState(false);
+  const [openCancelButton, setOpenCancelButton] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleClickOpenDelete = () => {
+    setOpenDeleteButton(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleCloseDelete = () => {
+    setOpenDeleteButton(false);
+  };
+
+  const handleClickOpenCancel = () => {
+    setOpenCancelButton(true);
+  };
+
+  const handleCloseCancel = () => {
+    setOpenCancelButton(false);
   };
 
   return (
@@ -74,13 +83,13 @@ export default function EditWordForm() {
             <Button
               variant="outlined"
               startIcon={<DeleteForeverIcon />}
-              onClick={handleClickOpen}
+              onClick={handleClickOpenDelete}
             >
               Delete
             </Button>
             <Dialog
-              open={open}
-              onClose={handleClose}
+              open={openDeleteButton}
+              onClose={handleCloseDelete}
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description"
             >
@@ -97,24 +106,50 @@ export default function EditWordForm() {
                 <Button
                   component={Link}
                   to={"/vocabulary"}
-                  onClick={handleClose}
+                  onClick={handleCloseDelete}
                   autoFocus
                 >
                   Так
                 </Button>
-                <Button onClick={handleClose}>Ні</Button>
+                <Button onClick={handleCloseDelete}>Ні</Button>
               </DialogActions>
             </Dialog>
           </div>
           <Grid>
             <Button
-              component={Link}
-              to={"/vocabulary"}
               variant="outlined"
               startIcon={<ClearIcon />}
+              onClick={handleClickOpenCancel}
             >
               Cancel
             </Button>
+            <Dialog
+              open={openCancelButton}
+              onClose={handleCloseCancel}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle
+                id="alert-dialog-title"
+                sx={{
+                  fontWeight: "400",
+                  fontSize: "17px",
+                }}
+              >
+                {"Вилучити зміни?"}
+              </DialogTitle>
+              <DialogActions>
+                <Button
+                  component={Link}
+                  to={"/word/:id"}
+                  onClick={handleCloseCancel}
+                  autoFocus
+                >
+                  Так
+                </Button>
+                <Button onClick={handleCloseCancel}>Ні</Button>
+              </DialogActions>
+            </Dialog>
             <Button
               component={Link}
               to={"/word/:id"}
