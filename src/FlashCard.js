@@ -13,10 +13,7 @@ export default function FlashCard() {
   const [showBack, setShowBack] = React.useState(false);
 
   const flipCard = () => {
-    setShowBack(true);
-  };
-  const showFront = () => {
-    setShowBack(false);
+    setShowBack(!showBack);
   };
 
   const cardFront = (
@@ -83,7 +80,7 @@ export default function FlashCard() {
 
           <Card
             className="FlipCardBack"
-            onClick={showFront}
+            onClick={flipCard}
             sx={{ borderRadius: "16px" }}
           >
             {cardBack}
