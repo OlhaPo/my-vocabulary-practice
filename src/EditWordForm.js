@@ -14,25 +14,10 @@ import { useNavigate } from "react-router-dom";
 
 export default function EditWordForm() {
   const navigate = useNavigate();
-  const [showDeleteConfirmation, setShowDeleteConfirmation] =
-    React.useState(false);
-  const [showCancelConfirmation, setShowCancelConfirmation] =
-    React.useState(false);
+  const [dialogState, setDialogState] = React.useState({ isOpen: false });
 
-  const confirmDelete = () => {
-    setShowDeleteConfirmation(true);
-  };
-
-  const handleCloseDelete = () => {
-    setShowDeleteConfirmation(false);
-  };
-
-  const confirmCancel = () => {
-    setShowCancelConfirmation(true);
-  };
-
-  const handleCloseCancel = () => {
-    setShowCancelConfirmation(false);
+  const closeDialog = () => {
+    setDialogState({ isOpen: false });
   };
 
   const saveWord = () => {
@@ -55,6 +40,24 @@ export default function EditWordForm() {
     // @TODO: implement
     // 1. Cancel changes
     navigate("/vocabulary");
+  };
+
+  const confirmDelete = () => {
+    setDialogState({
+      isOpen: true,
+      title: "Видалити слово зі словника?",
+      onYes: deleteWord,
+      onNo: closeDialog,
+    });
+  };
+
+  const confirmCancel = () => {
+    setDialogState({
+      isOpen: true,
+      title: "Вилучити зміни?",
+      onYes: cancelWord,
+      onNo: closeDialog,
+    });
   };
 
   return (
@@ -111,28 +114,7 @@ export default function EditWordForm() {
           >
             Delete
           </Button>
-          <Dialog
-            open={showDeleteConfirmation}
-            onClose={handleCloseDelete}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            <DialogTitle
-              id="alert-dialog-title"
-              sx={{
-                fontWeight: "400",
-                fontSize: "17px",
-              }}
-            >
-              Видалити слово зі словника?
-            </DialogTitle>
-            <DialogActions>
-              <Button onClick={deleteWord} autoFocus>
-                Так
-              </Button>
-              <Button onClick={handleCloseDelete}>Ні</Button>
-            </DialogActions>
-          </Dialog>
+
           <Grid>
             <Button
               variant="outlined"
@@ -141,28 +123,6 @@ export default function EditWordForm() {
             >
               Cancel
             </Button>
-            <Dialog
-              open={showCancelConfirmation}
-              onClose={handleCloseCancel}
-              aria-labelledby="alert-dialog-title"
-              aria-describedby="alert-dialog-description"
-            >
-              <DialogTitle
-                id="alert-dialog-title"
-                sx={{
-                  fontWeight: "400",
-                  fontSize: "17px",
-                }}
-              >
-                Вилучити зміни?
-              </DialogTitle>
-              <DialogActions>
-                <Button onClick={cancelWord} autoFocus>
-                  Так
-                </Button>
-                <Button onClick={handleCloseCancel}>Ні</Button>
-              </DialogActions>
-            </Dialog>
             <Button
               variant="outlined"
               sx={{
@@ -176,6 +136,29 @@ export default function EditWordForm() {
           </Grid>
         </Grid>
       </Box>
+
+      <Dialog
+        open={dialogState.isOpen}
+        onClose={dialogState.onNo}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle
+          id="alert-dialog-title"
+          sx={{
+            fontWeight: "400",
+            fontSize: "17px",
+          }}
+        >
+          {dialogState.title}
+        </DialogTitle>
+        <DialogActions>
+          <Button onClick={dialogState.onYes} autoFocus>
+            Так
+          </Button>
+          <Button onClick={dialogState.onNo}>Ні</Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }
