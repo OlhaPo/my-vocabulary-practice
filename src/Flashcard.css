@@ -1,0 +1,30 @@
+.FlashCardContainer {
+  margin-top: 120px;
+  perspective: 1000px;
+  border-radius: 16px;
+  height: 400px;
+}
+
+.FlipCard {
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+  position: relative;
+  height: 100%;
+}
+
+.FlipCardFront,
+.FlipCardBack {
+  backface-visibility: hidden;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border: 3px solid #1976d2;
+}
+
+.FlipCardBack {
+  transform: rotateY(180deg);
+}
+
+.FlashCardContainer.flip .FlipCard {
+  transform: rotateY(180deg);
+}
