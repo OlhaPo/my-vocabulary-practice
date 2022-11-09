@@ -7,29 +7,54 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ClearIcon from "@mui/icons-material/Clear";
 import Container from "@mui/material/Container";
 import DoneIcon from "@mui/icons-material/Done";
-import { Link } from "react-router-dom";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
+import { useNavigate } from "react-router-dom";
 
 export default function EditWordForm() {
-  const [openDeleteButton, setOpenDeleteButton] = React.useState(false);
-  const [openCancelButton, setOpenCancelButton] = React.useState(false);
+  const navigate = useNavigate();
+  const [showDeleteConfirmation, setShowDeleteConfirmation] =
+    React.useState(false);
+  const [showCancelConfirmation, setShowCancelConfirmation] =
+    React.useState(false);
 
-  const handleClickOpenDelete = () => {
-    setOpenDeleteButton(true);
+  const confirmDelete = () => {
+    setShowDeleteConfirmation(true);
   };
 
   const handleCloseDelete = () => {
-    setOpenDeleteButton(false);
+    setShowDeleteConfirmation(false);
   };
 
-  const handleClickOpenCancel = () => {
-    setOpenCancelButton(true);
+  const confirmCancel = () => {
+    setShowCancelConfirmation(true);
   };
 
   const handleCloseCancel = () => {
-    setOpenCancelButton(false);
+    setShowCancelConfirmation(false);
+  };
+
+  const saveWord = () => {
+    console.log("To be implemented");
+    // @TODO: implement
+    // 1. Save changes
+    // 2. Close modal
+    navigate("/word/:id");
+  };
+
+  const deleteWord = () => {
+    console.log("To be implemented");
+    // @TODO: implement
+    // 1. Delete Word
+    navigate("/vocabulary");
+  };
+
+  const cancelWord = () => {
+    console.log("To be implemented");
+    // @TODO: implement
+    // 1. Cancel changes
+    navigate("/vocabulary");
   };
 
   return (
@@ -79,52 +104,45 @@ export default function EditWordForm() {
           justifyContent="space-between"
           alignItems="center"
         >
-          <div>
-            <Button
-              variant="outlined"
-              startIcon={<DeleteForeverIcon />}
-              onClick={handleClickOpenDelete}
+          <Button
+            variant="outlined"
+            startIcon={<DeleteForeverIcon />}
+            onClick={confirmDelete}
+          >
+            Delete
+          </Button>
+          <Dialog
+            open={showDeleteConfirmation}
+            onClose={handleCloseDelete}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle
+              id="alert-dialog-title"
+              sx={{
+                fontWeight: "400",
+                fontSize: "17px",
+              }}
             >
-              Delete
-            </Button>
-            <Dialog
-              open={openDeleteButton}
-              onClose={handleCloseDelete}
-              aria-labelledby="alert-dialog-title"
-              aria-describedby="alert-dialog-description"
-            >
-              <DialogTitle
-                id="alert-dialog-title"
-                sx={{
-                  fontWeight: "400",
-                  fontSize: "17px",
-                }}
-              >
-                {"Видалити слово зі словника?"}
-              </DialogTitle>
-              <DialogActions>
-                <Button
-                  component={Link}
-                  to={"/vocabulary"}
-                  onClick={handleCloseDelete}
-                  autoFocus
-                >
-                  Так
-                </Button>
-                <Button onClick={handleCloseDelete}>Ні</Button>
-              </DialogActions>
-            </Dialog>
-          </div>
+              Видалити слово зі словника?
+            </DialogTitle>
+            <DialogActions>
+              <Button onClick={deleteWord} autoFocus>
+                Так
+              </Button>
+              <Button onClick={handleCloseDelete}>Ні</Button>
+            </DialogActions>
+          </Dialog>
           <Grid>
             <Button
               variant="outlined"
               startIcon={<ClearIcon />}
-              onClick={handleClickOpenCancel}
+              onClick={confirmCancel}
             >
               Cancel
             </Button>
             <Dialog
-              open={openCancelButton}
+              open={showCancelConfirmation}
               onClose={handleCloseCancel}
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description"
@@ -136,28 +154,22 @@ export default function EditWordForm() {
                   fontSize: "17px",
                 }}
               >
-                {"Вилучити зміни?"}
+                Вилучити зміни?
               </DialogTitle>
               <DialogActions>
-                <Button
-                  component={Link}
-                  to={"/word/:id"}
-                  onClick={handleCloseCancel}
-                  autoFocus
-                >
+                <Button onClick={cancelWord} autoFocus>
                   Так
                 </Button>
                 <Button onClick={handleCloseCancel}>Ні</Button>
               </DialogActions>
             </Dialog>
             <Button
-              component={Link}
-              to={"/word/:id"}
               variant="outlined"
               sx={{
                 ml: "20px",
               }}
               startIcon={<DoneIcon />}
+              onClick={saveWord}
             >
               Ok
             </Button>
