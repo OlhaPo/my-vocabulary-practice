@@ -63,7 +63,7 @@ export default function FlashCard() {
 
   return (
     <Container className="FlashCard">
-      <Box className="FlashCardContainer flip">
+      <Box className={"FlashCardContainer" + (showBack ? " flip" : "")}>
         <Box className="FlipCard">
           <Card className="FlipCardFront" sx={{ borderRadius: "16px" }}>
             {cardFront}
@@ -75,7 +75,6 @@ export default function FlashCard() {
                   mb: "20px",
                 }}
                 onClick={flipCard}
-                onClose={showFront}
               >
                 Tłumaczenie
               </Button>
@@ -84,8 +83,7 @@ export default function FlashCard() {
 
           <Card
             className="FlipCardBack"
-            open={showBack}
-            onClose={showFront}
+            onClick={showFront}
             sx={{ borderRadius: "16px" }}
           >
             {cardBack}

@@ -28,3 +28,7 @@
 .FlashCardContainer.flip .FlipCard {
   transform: rotateY(180deg);
 }
+
+.flip .FlipCardFront {
+  pointer-events: none;
+}
