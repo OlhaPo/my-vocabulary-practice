@@ -7,8 +7,9 @@ export const vocabularySlice = createSlice({
   },
   reducers: {
     addWord: (state, action) => {
-      // @TODO generate new id
-      state.data.push(action.payload);
+      const lastIndex = state.data.length - 1;
+      const lastItem = state.data[lastIndex];
+      state.data.push({ ...action.payload, id: lastItem.id + 1 });
       saveToLocalStorage(state.data);
       return state;
     },
