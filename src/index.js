@@ -1,6 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import store from "./store/store";
+import { Provider } from "react-redux";
+
 import reportWebVitals from "./reportWebVitals";
 import PositionedMenu from "./PositionedMenu";
 import Container from "@mui/material/Container";
@@ -15,20 +18,22 @@ import "./index.css";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Container maxWidth="sm" sx={{ height: "100%" }}>
-      <BrowserRouter>
-        <PositionedMenu />
-        <Routes>
-          <Route path="/" element={<Homescreen />} />
-          <Route path="practice" element={<Practice />} />
-          <Route path="flashcard" element={<FlashCard />} />
-          <Route path="vocabulary" element={<Vocabulary />} />
-          <Route path="word/:id" element={<WordOverview />} />
-          <Route path="edit/:id" element={<EditWordForm />} />
-        </Routes>
-        {/* <App sx={{ bgcolor: "#cfe8fc", height: "100%" }} /> */}
-      </BrowserRouter>
-    </Container>
+    <Provider store={store}>
+      <Container maxWidth="sm" sx={{ height: "100%" }}>
+        <BrowserRouter>
+          <PositionedMenu />
+          <Routes>
+            <Route path="/" element={<Homescreen />} />
+            <Route path="practice" element={<Practice />} />
+            <Route path="flashcard" element={<FlashCard />} />
+            <Route path="vocabulary" element={<Vocabulary />} />
+            <Route path="word/:id" element={<WordOverview />} />
+            <Route path="edit/:id" element={<EditWordForm />} />
+            <Route path="create" element={<EditWordForm />} />
+          </Routes>
+        </BrowserRouter>
+      </Container>
+    </Provider>
   </React.StrictMode>
 );
 

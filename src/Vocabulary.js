@@ -1,5 +1,6 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
+import { useSelector, useDispatch } from "react-redux";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,32 +16,7 @@ import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
 
-const data = [
-  {
-    id: 1,
-    value_ua: "pies",
-    value_pl: "собака",
-    description: "",
-  },
-  {
-    id: 2,
-    value_ua: "kot",
-    value_pl: "кіт",
-    description: "",
-  },
-  {
-    id: 3,
-    value_ua: "tygrys",
-    value_pl: "тигр",
-    description: "",
-  },
-  {
-    id: 4,
-    value_ua: "lew",
-    value_pl: "лев",
-    description: "",
-  },
-];
+import { addWord } from "./store/vocabularySlice";
 
 const columns = [
   { id: "word", label: "Слово", minWidth: 170 },
@@ -48,7 +24,7 @@ const columns = [
   { id: "edit", label: "", minWidth: 50, align: "right" },
 ];
 
-function createData(row) {
+function createRow(row) {
   return {
     word: (
       <Link
@@ -74,11 +50,15 @@ function createData(row) {
   };
 }
 
-const rows = data.map((row) => {
-  return createData(row);
-});
-
 export default function Vocabulary() {
+  const rows = useSelector((state) => {
+    return state.vocabulary.data.map((row) => {
+      return createRow(row);
+    });
+  });
+
+  const dispatch = useDispatch();
+
   const Div = styled("div")(({ theme }) => ({
     ...theme.typography.button,
     backgroundColor: theme.palette.background.paper,
@@ -174,8 +154,22 @@ export default function Vocabulary() {
         />
       </Paper>
       <Box sx={{ fontSize: "60px", textAlign: "right" }}>
-        <Button component={Link} to={"/edit/:id"} variant="text">
+        <Button component={Link} to={"/create"} variant="text">
           <AddIcon sx={{ fontSize: "30px" }} />
+        </Button>
+        <Button
+          variant="text"
+          onClick={() =>
+            dispatch(
+              addWord({
+                value_ua: "drzewo",
+                value_pl: "дерево",
+                description: "",
+              })
+            )
+          }
+        >
+          TEST
         </Button>
       </Box>
     </Container>
