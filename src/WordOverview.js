@@ -8,37 +8,45 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import EditIcon from "@mui/icons-material/Edit";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const paper = (
-  <Box>
-    <Typography
-      sx={{ fontSize: 15, mt: "20px", fontWeight: "bold" }}
-      variant="h6"
-      gutterBottom
-    >
-      PL
-    </Typography>
-    <Typography variant="h4">Cześć</Typography>
-    <Divider sx={{ mb: "35px", mt: "35px" }} />
-    <Typography
-      sx={{ fontSize: 15, fontWeight: "bold" }}
-      variant="h6"
-      gutterBottom
-    >
-      UA
-    </Typography>
-    <Typography variant="h4">Привіт</Typography>
-    <Typography
-      variant="body1"
-      sx={{ mb: "20px", mt: "15px", fontStyle: "italic" }}
-    >
-      Cześć, chciałem tylko powiedzieć, że twój problem jest rozwiązany.
-    </Typography>
-  </Box>
-);
+const paper = function (word) {
+  return (
+    <Box>
+      <Typography
+        sx={{ fontSize: 15, mt: "20px", fontWeight: "bold" }}
+        variant="h6"
+        gutterBottom
+      >
+        PL
+      </Typography>
+      <Typography variant="h4">{word.value_pl}</Typography>
+      <Divider sx={{ mb: "35px", mt: "35px" }} />
+      <Typography
+        sx={{ fontSize: 15, fontWeight: "bold" }}
+        variant="h6"
+        gutterBottom
+      >
+        UA
+      </Typography>
+      <Typography variant="h4">{word.value_ua}</Typography>
+      <Typography
+        variant="body1"
+        sx={{ mb: "20px", mt: "15px", fontStyle: "italic" }}
+      >
+        {word.description}
+      </Typography>
+    </Box>
+  );
+};
 
 export default function WordOverview() {
+  const { id } = useParams();
+  const word = useSelector((state) => {
+    return state.vocabulary.data.find((row) => row.id === +id);
+  });
+
   return (
     <Container className="WordOverview">
       <Box
@@ -52,7 +60,7 @@ export default function WordOverview() {
           },
         }}
       >
-        <Paper elevation={3}>{paper}</Paper>
+        <Paper elevation={3}>{paper(word)}</Paper>
       </Box>
       <Box sx={{ fontSize: "60px", mt: "30px" }}>
         <Grid
