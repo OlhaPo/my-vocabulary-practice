@@ -11,6 +11,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+import { getWordById } from "./store/vocabularySlice";
+
 const paper = function (word) {
   return (
     <Box>
@@ -43,9 +45,7 @@ const paper = function (word) {
 
 export default function WordOverview() {
   const { id } = useParams();
-  const word = useSelector((state) => {
-    return state.vocabulary.data.find((row) => row.id === +id);
-  });
+  const word = useSelector(getWordById(+id));
 
   return (
     <Container className="WordOverview">

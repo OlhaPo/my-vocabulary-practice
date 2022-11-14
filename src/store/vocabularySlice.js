@@ -16,6 +16,12 @@ export const vocabularySlice = createSlice({
   },
 });
 
+export const getWordById = (id) => {
+  return function (state) {
+    return state.vocabulary.data.find((row) => row.id === id);
+  };
+};
+
 function saveToLocalStorage(data) {
   localStorage.setItem("vocabulary", JSON.stringify(data));
 }
