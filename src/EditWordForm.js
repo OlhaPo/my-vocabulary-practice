@@ -13,7 +13,11 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 
-import { deleteWordAction, getWordById } from "./store/vocabularySlice";
+import {
+  deleteWordAction,
+  getWordById,
+  updateWord,
+} from "./store/vocabularySlice";
 
 export default function EditWordForm() {
   const navigate = useNavigate();
@@ -29,9 +33,8 @@ export default function EditWordForm() {
   const saveWord = () => {
     console.log("To be implemented");
     // @TODO: implement
-    // 1. Save changes
-    // 2. Close modal
-    navigate("/word/:id");
+    // dispatch(updateWord(....))
+    navigate("/word/" + id);
   };
 
   const deleteWord = () => {

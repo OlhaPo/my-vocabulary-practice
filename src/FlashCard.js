@@ -7,9 +7,14 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useSelector } from "react-redux";
+
+import { getRandomWord } from "./store/vocabularySlice";
 import "./Flashcard.css";
 
 export default function FlashCard() {
+  const word = useSelector(getRandomWord);
+  console.log(word);
   const [showBack, setShowBack] = React.useState(false);
 
   const flipCard = () => {
@@ -31,7 +36,7 @@ export default function FlashCard() {
           component="div"
           sx={{ fontSize: 40, mt: "25px", textAlign: "center" }}
         >
-          Cześć
+          {word.value_pl}
         </Typography>
       </CardContent>
     </React.Fragment>
@@ -52,7 +57,7 @@ export default function FlashCard() {
           component="div"
           sx={{ fontSize: 40, mt: "25px", textAlign: "center", mb: "40px" }}
         >
-          Привіт
+          {word.value_ua}
         </Typography>
       </CardContent>
     </React.Fragment>

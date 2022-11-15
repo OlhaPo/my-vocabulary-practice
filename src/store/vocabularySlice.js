@@ -3,26 +3,26 @@ import { createSlice } from "@reduxjs/toolkit";
 const placeholderData = [
   {
     id: 1,
-    value_ua: "pies",
-    value_pl: "собака",
+    value_ua: "собака",
+    value_pl: "pies",
     description: "",
   },
   {
     id: 2,
-    value_ua: "kot",
-    value_pl: "кіт",
+    value_ua: "кіт",
+    value_pl: "kot",
     description: "",
   },
   {
     id: 3,
-    value_ua: "tygrys",
-    value_pl: "тигр",
+    value_ua: "тигр",
+    value_pl: "tygrys",
     description: "",
   },
   {
     id: 4,
-    value_ua: "lew",
-    value_pl: "лев",
+    value_ua: "лев",
+    value_pl: "lew",
     description: "",
   },
 ];
@@ -59,6 +59,11 @@ export const getWordById = (id) => {
   };
 };
 
+export const getRandomWord = (state) => {
+  const index = Math.floor(Math.random() * state.vocabulary.data.length);
+  return state.vocabulary.data[index];
+};
+
 function saveToLocalStorage(data) {
   localStorage.setItem("vocabulary", JSON.stringify(data));
 }
@@ -69,6 +74,7 @@ function getFromLocalStorage() {
   if (parsed !== null) {
     return parsed;
   } else {
+    saveToLocalStorage(placeholderData);
     return placeholderData;
   }
 }
