@@ -72,7 +72,7 @@ export default function WordOverview() {
           <Button component={Link} to={"/vocabulary"}>
             <ArrowBackIcon sx={{ fontSize: "30px" }} />
           </Button>
-          <Button component={Link} to={"/edit/:id"}>
+          <Button component={Link} to={"/edit/" + id}>
             <EditIcon sx={{ fontSize: "30px" }} />
           </Button>
         </Grid>

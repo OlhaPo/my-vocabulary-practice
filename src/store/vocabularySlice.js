@@ -1,5 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const placeholderData = [
+  {
+    id: 1,
+    value_ua: "pies",
+    value_pl: "собака",
+    description: "",
+  },
+  {
+    id: 2,
+    value_ua: "kot",
+    value_pl: "кіт",
+    description: "",
+  },
+  {
+    id: 3,
+    value_ua: "tygrys",
+    value_pl: "тигр",
+    description: "",
+  },
+  {
+    id: 4,
+    value_ua: "lew",
+    value_pl: "лев",
+    description: "",
+  },
+];
+
 export const vocabularySlice = createSlice({
   name: "vocabulary",
   initialState: {
@@ -42,7 +69,7 @@ function getFromLocalStorage() {
   if (parsed !== null) {
     return parsed;
   } else {
-    return [];
+    return placeholderData;
   }
 }
 
