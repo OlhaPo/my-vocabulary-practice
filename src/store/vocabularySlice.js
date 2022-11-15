@@ -13,6 +13,16 @@ export const vocabularySlice = createSlice({
       saveToLocalStorage(state.data);
       return state;
     },
+    deleteWordAction: (state, action) => {
+      state.data = state.data.filter((word) => word.id !== action.payload);
+      saveToLocalStorage(state.data);
+      return state;
+    },
+    updateWord: (state, action) => {
+      // @TODO: implement
+      saveToLocalStorage(state.data);
+      return state;
+    },
   },
 });
 
@@ -36,6 +46,7 @@ function getFromLocalStorage() {
   }
 }
 
-export const { addWord } = vocabularySlice.actions;
+export const { addWord, deleteWordAction, updateWord } =
+  vocabularySlice.actions;
 
 export default vocabularySlice.reducer;

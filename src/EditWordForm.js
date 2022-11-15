@@ -1,4 +1,6 @@
 import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
@@ -10,11 +12,15 @@ import DoneIcon from "@mui/icons-material/Done";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useNavigate } from "react-router-dom";
+
+import { deleteWordAction, getWordById } from "./store/vocabularySlice";
 
 export default function EditWordForm() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [dialogState, setDialogState] = React.useState({ isOpen: false });
+  const { id } = useParams();
+  const word = useSelector(getWordById(+id));
 
   const closeDialog = () => {
     setDialogState({ isOpen: false });
@@ -29,9 +35,7 @@ export default function EditWordForm() {
   };
 
   const deleteWord = () => {
-    console.log("To be implemented");
-    // @TODO: implement
-    // 1. Delete Word
+    dispatch(deleteWordAction(word.id));
     navigate("/vocabulary");
   };
 
