@@ -13,11 +13,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 
-import {
-  deleteWordAction,
-  getWordById,
-  updateWord,
-} from "./store/vocabularySlice";
+import { deleteWordAction, getWordById } from "./store/vocabularySlice";
 
 export default function EditWordForm() {
   const navigate = useNavigate();
