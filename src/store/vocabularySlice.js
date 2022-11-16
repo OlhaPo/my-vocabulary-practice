@@ -3,9 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 const placeholderData = [
   {
     id: 1,
-    value_ua: "собака",
-    value_pl: "pies",
-    description: "",
+    value_ua: "привіт",
+    value_pl: "cześć",
+    description:
+      "Cześć, chciałem tylko powiedzieć, że twój problem jest rozwiązany",
   },
   {
     id: 2,

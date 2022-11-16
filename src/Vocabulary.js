@@ -31,7 +31,7 @@ function createRow(row) {
         style={{ textDecoration: "none", color: "#000000" }}
         to={"/word/" + row.id}
       >
-        {row.value_ua}
+        {row.value_pl}
       </Link>
     ),
     translation: (
@@ -39,7 +39,7 @@ function createRow(row) {
         style={{ textDecoration: "none", color: "#000000" }}
         to={"/word/" + row.id}
       >
-        {row.value_pl}
+        {row.value_ua}
       </Link>
     ),
     edit: (
@@ -162,8 +162,8 @@ export default function Vocabulary() {
           onClick={() =>
             dispatch(
               addWord({
-                value_ua: "drzewo",
-                value_pl: "дерево",
+                value_ua: "дерево",
+                value_pl: "drzewo",
                 description: "",
               })
             )
