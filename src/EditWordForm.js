@@ -19,8 +19,23 @@ export default function EditWordForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [dialogState, setDialogState] = React.useState({ isOpen: false });
+  // const [formErrors, setFormErrors] = React.useState({
+  // value_ua: "",
+  // value_pl: "",
+  // description: "",
+  // });
+  const [changedWord, setChangedWord] = React.useState({
+    value_ua: "",
+    value_pl: "",
+    description: "",
+  });
+  const [hasChanges, setHasChanges] = React.useState(false);
   const { id } = useParams();
   const word = useSelector(getWordById(+id));
+
+  React.useEffect(() => {
+    setChangedWord(word);
+  }, [word]);
 
   const closeDialog = () => {
     setDialogState({ isOpen: false });
@@ -39,9 +54,6 @@ export default function EditWordForm() {
   };
 
   const cancelWord = () => {
-    console.log("To be implemented");
-    // @TODO: implement
-    // 1. Cancel changes
     navigate("/vocabulary");
   };
 
@@ -55,12 +67,23 @@ export default function EditWordForm() {
   };
 
   const confirmCancel = () => {
-    setDialogState({
-      isOpen: true,
-      title: "Вилучити зміни?",
-      onYes: cancelWord,
-      onNo: closeDialog,
-    });
+    if (hasChanges) {
+      setDialogState({
+        isOpen: true,
+        title: "Вилучити зміни?",
+        onYes: cancelWord,
+        onNo: closeDialog,
+      });
+    } else {
+      cancelWord();
+    }
+  };
+
+  const handleUserInput = (e) => {
+    setHasChanges(true);
+    const fieldName = e.target.name;
+    const newValue = e.target.value;
+    setChangedWord({ ...changedWord, [fieldName]: newValue });
   };
 
   return (
@@ -82,6 +105,9 @@ export default function EditWordForm() {
             label="Cлово UA"
             fullWidth
             margin="normal"
+            name="value_ua"
+            value={changedWord.value_ua}
+            onChange={handleUserInput}
           />
         </div>
 
@@ -92,6 +118,9 @@ export default function EditWordForm() {
             label="Слово PL"
             fullWidth
             margin="normal"
+            name="value_pl"
+            value={changedWord.value_pl}
+            onChange={handleUserInput}
           />
         </div>
         <div>
@@ -100,6 +129,9 @@ export default function EditWordForm() {
             label="Приклад вживання"
             fullWidth
             margin="normal"
+            name="description"
+            value={changedWord.description}
+            onChange={handleUserInput}
           />
         </div>
       </Box>
