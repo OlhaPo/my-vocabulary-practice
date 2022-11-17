@@ -7,18 +7,23 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-import { getRandomWord } from "./store/vocabularySlice";
+import { getRandomWord, getRandomWordAction } from "./store/vocabularySlice";
 import "./Flashcard.css";
 
 export default function FlashCard() {
   const word = useSelector(getRandomWord);
-  console.log(word);
+  const dispatch = useDispatch();
   const [showBack, setShowBack] = React.useState(false);
 
   const flipCard = () => {
     setShowBack(!showBack);
+  };
+
+  const nextWord = () => {
+    setShowBack(false);
+    setTimeout(() => dispatch(getRandomWordAction()), 200);
   };
 
   const cardFront = (
@@ -36,8 +41,21 @@ export default function FlashCard() {
           component="div"
           sx={{ fontSize: 40, mt: "25px", textAlign: "center" }}
         >
-          {word.value_pl}
+          {word?.value_pl}
         </Typography>
+
+        <CardActions sx={{ justifyContent: "center" }}>
+          <Button
+            size="small"
+            sx={{
+              fontSize: 10,
+              mb: "20px",
+            }}
+            onClick={flipCard}
+          >
+            Tłumaczenie
+          </Button>
+        </CardActions>
       </CardContent>
     </React.Fragment>
   );
@@ -57,10 +75,16 @@ export default function FlashCard() {
           component="div"
           sx={{ fontSize: 40, mt: "25px", textAlign: "center", mb: "40px" }}
         >
-          {word.value_ua}
+          {word?.value_ua}
         </Typography>
       </CardContent>
     </React.Fragment>
+  );
+
+  const emptyState = (
+    <CardContent>
+      <Typography>В словнику зараз немає жодного слова</Typography>
+    </CardContent>
   );
 
   return (
@@ -68,19 +92,7 @@ export default function FlashCard() {
       <Box className={"FlashCardContainer" + (showBack ? " flip" : "")}>
         <Box className="FlipCard">
           <Card className="FlipCardFront" sx={{ borderRadius: "16px" }}>
-            {cardFront}
-            <CardActions sx={{ justifyContent: "center" }}>
-              <Button
-                size="small"
-                sx={{
-                  fontSize: 10,
-                  mb: "20px",
-                }}
-                onClick={flipCard}
-              >
-                Tłumaczenie
-              </Button>
-            </CardActions>
+            {word ? cardFront : emptyState}
           </Card>
 
           <Card
@@ -93,7 +105,7 @@ export default function FlashCard() {
         </Box>
       </Box>
       <Box sx={{ fontSize: "60px", textAlign: "right" }}>
-        <Button variant="text">
+        <Button variant="text" onClick={nextWord}>
           <ArrowForwardIcon sx={{ fontSize: "30px" }} />
         </Button>
       </Box>

@@ -28,10 +28,12 @@ const placeholderData = [
   },
 ];
 
+const vocabulary = getFromLocalStorage();
 export const vocabularySlice = createSlice({
   name: "vocabulary",
   initialState: {
-    data: getFromLocalStorage(),
+    data: vocabulary,
+    randomWord: getRandomElement(vocabulary),
   },
   reducers: {
     addWord: (state, action) => {
@@ -51,6 +53,10 @@ export const vocabularySlice = createSlice({
       saveToLocalStorage(state.data);
       return state;
     },
+    getRandomWordAction: (state) => {
+      state.randomWord = getRandomElement(state.data);
+      return state;
+    },
   },
 });
 
@@ -61,8 +67,7 @@ export const getWordById = (id) => {
 };
 
 export const getRandomWord = (state) => {
-  const index = Math.floor(Math.random() * state.vocabulary.data.length);
-  return state.vocabulary.data[index];
+  return state.vocabulary.randomWord;
 };
 
 function saveToLocalStorage(data) {
@@ -80,7 +85,15 @@ function getFromLocalStorage() {
   }
 }
 
-export const { addWord, deleteWordAction, updateWord } =
+function getRandomElement(array) {
+  if (array.length === 0) {
+    return null;
+  }
+  const randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex];
+}
+
+export const { addWord, deleteWordAction, updateWord, getRandomWordAction } =
   vocabularySlice.actions;
 
 export default vocabularySlice.reducer;
