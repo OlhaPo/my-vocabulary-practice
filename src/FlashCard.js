@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { getRandomWord, getRandomWordAction } from "./store/vocabularySlice";
 import "./Flashcard.css";
@@ -83,7 +84,30 @@ export default function FlashCard() {
 
   const emptyState = (
     <CardContent>
-      <Typography>В словнику зараз немає жодного слова</Typography>
+      <Typography
+        variant="h5"
+        component="div"
+        sx={{
+          fontSize: 20,
+          mt: "100px",
+          textAlign: "center",
+          fontWeight: "300",
+        }}
+      >
+        У словнику немає жодного слова
+      </Typography>
+      <CardActions sx={{ justifyContent: "center" }}>
+        <Button
+          sx={{
+            fontSize: 12,
+            mt: "20px",
+          }}
+          component={Link}
+          to={"/vocabulary"}
+        >
+          Перейти до внесення слів
+        </Button>
+      </CardActions>
     </CardContent>
   );
 
