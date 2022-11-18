@@ -13,7 +13,11 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 
-import { deleteWordAction, getWordById } from "./store/vocabularySlice";
+import {
+  deleteWordAction,
+  getWordById,
+  updateWord,
+} from "./store/vocabularySlice";
 
 export default function EditWordForm() {
   const navigate = useNavigate();
@@ -37,14 +41,20 @@ export default function EditWordForm() {
     setChangedWord(word);
   }, [word]);
 
+  React.useEffect(() => {
+    if (word === undefined) {
+      navigate("/not-found");
+    }
+  }, [word, navigate]);
+
   const closeDialog = () => {
     setDialogState({ isOpen: false });
   };
 
   const saveWord = () => {
     console.log("To be implemented");
-    // @TODO: implement
-    // dispatch(updateWord(....))
+    // @TODO: add validity checks
+    dispatch(updateWord(changedWord));
     navigate("/word/" + id);
   };
 
