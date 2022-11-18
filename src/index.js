@@ -13,6 +13,7 @@ import FlashCard from "./FlashCard";
 import Vocabulary from "./Vocabulary";
 import WordOverview from "./WordOverview";
 import EditWordForm from "./EditWordForm";
+import PageNotFound from "./PageNotFound";
 import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -30,6 +31,8 @@ root.render(
             <Route path="word/:id" element={<WordOverview />} />
             <Route path="edit/:id" element={<EditWordForm />} />
             <Route path="create" element={<EditWordForm />} />
+            <Route path="not-found" element={<PageNotFound />} />
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>
       </Container>

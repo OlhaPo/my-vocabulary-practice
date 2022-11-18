@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 import { getRandomWord, getRandomWordAction } from "./store/vocabularySlice";
 import "./Flashcard.css";
@@ -18,11 +18,14 @@ export default function FlashCard() {
   const dispatch = useDispatch();
   const { language } = useParams();
   const oppositeLanguage = language === "pl" ? "ua" : "pl";
+  const navigate = useNavigate();
   const [showBack, setShowBack] = React.useState(false);
 
-  if (language !== "pl" && language !== "ua") {
-    console.log("TODO: redirect to Not found");
-  }
+  React.useEffect(() => {
+    if (language !== "pl" && language !== "ua") {
+      navigate("/not-found");
+    }
+  }, [language, navigate]);
 
   const flipCard = () => {
     setShowBack(!showBack);
