@@ -30,14 +30,20 @@ export default function Practice() {
         <Div sx={{ p: "20px", fontSize: 18 }}>Практика</Div>
         <Button
           component={Link}
-          to={"/Flashcard"}
+          to={"/flashcard/pl"}
           variant="outlined"
           size="large"
           sx={{ m: "20px 0", width: "50%" }}
         >
           PL - UA
         </Button>
-        <Button variant="outlined" size="large" sx={{ width: "50%" }}>
+        <Button
+          component={Link}
+          to={"/flashcard/ua"}
+          variant="outlined"
+          size="large"
+          sx={{ width: "50%" }}
+        >
           UA - PL
         </Button>
       </Box>

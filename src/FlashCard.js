@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { getRandomWord, getRandomWordAction } from "./store/vocabularySlice";
 import "./Flashcard.css";
@@ -16,7 +16,13 @@ import "./Flashcard.css";
 export default function FlashCard() {
   const word = useSelector(getRandomWord);
   const dispatch = useDispatch();
+  const { language } = useParams();
+  const oppositeLanguage = language === "pl" ? "ua" : "pl";
   const [showBack, setShowBack] = React.useState(false);
+
+  if (language !== "pl" && language !== "ua") {
+    console.log("TODO: redirect to Not found");
+  }
 
   const flipCard = () => {
     setShowBack(!showBack);
@@ -27,6 +33,10 @@ export default function FlashCard() {
     setTimeout(() => dispatch(getRandomWordAction()), 200);
   };
 
+  const getValueForLang = (lang) => {
+    return word["value_" + lang];
+  };
+
   const cardFront = (
     <React.Fragment>
       <CardContent>
@@ -35,14 +45,14 @@ export default function FlashCard() {
           variant="h6"
           gutterBottom
         >
-          PL
+          {language.toUpperCase()}
         </Typography>
         <Typography
           variant="h5"
           component="div"
           sx={{ fontSize: 40, mt: "25px", textAlign: "center" }}
         >
-          {word?.value_pl}
+          {getValueForLang(language)}
         </Typography>
 
         <CardActions sx={{ justifyContent: "center" }}>
@@ -69,14 +79,14 @@ export default function FlashCard() {
           variant="h6"
           gutterBottom
         >
-          UA
+          {oppositeLanguage.toUpperCase()}
         </Typography>
         <Typography
           variant="h5"
           component="div"
           sx={{ fontSize: 40, mt: "25px", textAlign: "center", mb: "40px" }}
         >
-          {word?.value_ua}
+          {getValueForLang(oppositeLanguage)}
         </Typography>
       </CardContent>
     </React.Fragment>

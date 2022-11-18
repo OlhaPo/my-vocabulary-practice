@@ -25,7 +25,7 @@ root.render(
           <Routes>
             <Route path="/" element={<Homescreen />} />
             <Route path="practice" element={<Practice />} />
-            <Route path="flashcard" element={<FlashCard />} />
+            <Route path="flashcard/:language" element={<FlashCard />} />
             <Route path="vocabulary" element={<Vocabulary />} />
             <Route path="word/:id" element={<WordOverview />} />
             <Route path="edit/:id" element={<EditWordForm />} />
