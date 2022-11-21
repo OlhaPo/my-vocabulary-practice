@@ -34,12 +34,14 @@ export const vocabularySlice = createSlice({
   initialState: {
     data: vocabulary,
     randomWord: getRandomElement(vocabulary),
+    lastCreatedId: null,
   },
   reducers: {
     addWord: (state, action) => {
       const lastIndex = state.data.length - 1;
       const lastItem = state.data[lastIndex];
       state.data.push({ ...action.payload, id: lastItem.id + 1 });
+      // @TODO: save new id to state.lastCreatedId
       saveToLocalStorage(state.data);
       return state;
     },

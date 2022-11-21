@@ -14,6 +14,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 
 import {
+  addWord,
   deleteWordAction,
   getWordById,
   updateWord,
@@ -35,27 +36,35 @@ export default function EditWordForm() {
   });
   const [hasChanges, setHasChanges] = React.useState(false);
   const { id } = useParams();
+  const isCreateMode = !id;
   const word = useSelector(getWordById(+id));
 
   React.useEffect(() => {
-    setChangedWord(word);
-  }, [word]);
+    if (!isCreateMode) {
+      setChangedWord(word);
+    }
+  }, [word, isCreateMode]);
 
   React.useEffect(() => {
-    if (word === undefined) {
+    if (word === undefined && !isCreateMode) {
       navigate("/not-found");
     }
-  }, [word, navigate]);
+  }, [word, navigate, isCreateMode]);
 
   const closeDialog = () => {
     setDialogState({ isOpen: false });
   };
 
   const saveWord = () => {
-    console.log("To be implemented");
     // @TODO: add validity checks
-    dispatch(updateWord(changedWord));
-    navigate("/word/" + id);
+    if (isCreateMode) {
+      dispatch(addWord(changedWord));
+      // @TODO: remove this redirect after implementing redirect to the new word card
+      navigate("/vocabulary");
+    } else {
+      dispatch(updateWord(changedWord));
+      navigate("/word/" + id);
+    }
   };
 
   const deleteWord = () => {
@@ -152,13 +161,17 @@ export default function EditWordForm() {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Button
-            variant="outlined"
-            startIcon={<DeleteForeverIcon />}
-            onClick={confirmDelete}
-          >
-            Delete
-          </Button>
+          {isCreateMode ? (
+            <span></span>
+          ) : (
+            <Button
+              variant="outlined"
+              startIcon={<DeleteForeverIcon />}
+              onClick={confirmDelete}
+            >
+              Delete
+            </Button>
+          )}
 
           <Grid>
             <Button

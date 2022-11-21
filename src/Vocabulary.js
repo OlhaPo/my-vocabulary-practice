@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,8 +15,6 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
-
-import { addWord } from "./store/vocabularySlice";
 
 const columns = [
   { id: "word", label: "Слово", minWidth: 170 },
@@ -56,8 +54,6 @@ export default function Vocabulary() {
       return createRow(row);
     });
   });
-
-  const dispatch = useDispatch();
 
   const Div = styled("div")(({ theme }) => ({
     ...theme.typography.button,
@@ -156,20 +152,6 @@ export default function Vocabulary() {
       <Box sx={{ fontSize: "60px", textAlign: "right" }}>
         <Button component={Link} to={"/create"} variant="text">
           <AddIcon sx={{ fontSize: "30px" }} />
-        </Button>
-        <Button
-          variant="text"
-          onClick={() =>
-            dispatch(
-              addWord({
-                value_ua: "дерево",
-                value_pl: "drzewo",
-                description: "",
-              })
-            )
-          }
-        >
-          TEST
         </Button>
       </Box>
     </Container>
