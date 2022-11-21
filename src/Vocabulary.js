@@ -17,9 +17,9 @@ import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
 
 const columns = [
-  { id: "word", label: "Слово", minWidth: 170 },
-  { id: "translation", label: "Переклад", minWidth: 100 },
-  { id: "edit", label: "", minWidth: 50, align: "right" },
+  { id: "word", label: "Слово", minWidth: 30 },
+  { id: "translation", label: "Переклад", minWidth: 30 },
+  { id: "edit", label: "", minWidt: 10, align: "right" },
 ];
 
 function createRow(row) {
@@ -74,12 +74,10 @@ export default function Vocabulary() {
 
   return (
     <Container className="Vocabulary">
-      <Div sx={{ p: "20px", fontSize: 18, mt: "100px", textAlign: "center" }}>
-        Словник
-      </Div>
+      <Div sx={{ p: "20px", fontSize: 18, textAlign: "center" }}>Словник</Div>
       <Paper
         sx={{
-          width: "100%",
+          width: "auto",
           border: " 1px solid #3D82D3",
         }}
       >

@@ -132,7 +132,7 @@ export default function EditWordForm() {
         sx={{
           width: 500,
           maxWidth: "100%",
-          m: "100px 0",
+          m: "50px 0",
         }}
         noValidate
         autoComplete="off"

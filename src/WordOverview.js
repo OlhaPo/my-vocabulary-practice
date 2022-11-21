@@ -54,7 +54,7 @@ export default function WordOverview() {
           display: "flex",
           flexWrap: "wrap",
           "& > :not(style)": {
-            mt: "100px",
+            mt: "50px",
             width: "600px",
             p: "20px 30px",
           },
