@@ -17,9 +17,9 @@ import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
 
 const columns = [
-  { id: "word", label: "Слово", minWidth: 30 },
-  { id: "translation", label: "Переклад", minWidth: 30 },
-  { id: "edit", label: "", minWidt: 10, align: "right" },
+  { id: "word", label: "Слово", minWidth: 70 },
+  { id: "translation", label: "Переклад", minWidth: 70 },
+  { id: "edit", label: "", minWidt: 5, align: "right" },
 ];
 
 function createRow(row) {
@@ -85,7 +85,6 @@ export default function Vocabulary() {
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
-                <TableCell></TableCell>
                 {columns.map((column) => (
                   <TableCell
                     key={column.id}
@@ -109,7 +108,6 @@ export default function Vocabulary() {
                       key={i}
                       sx={{ borderColor: "red" }}
                     >
-                      <TableCell>{i + 1}</TableCell>
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
