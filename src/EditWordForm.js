@@ -18,6 +18,8 @@ import {
   deleteWordAction,
   getWordById,
   updateWord,
+  getLastCreatedId,
+  resetLastId,
 } from "./store/vocabularySlice";
 
 export default function EditWordForm() {
@@ -35,6 +37,8 @@ export default function EditWordForm() {
     description: "",
   });
   const [hasChanges, setHasChanges] = React.useState(false);
+  const lastId = useSelector(getLastCreatedId);
+
   const { id } = useParams();
   const isCreateMode = !id;
   const word = useSelector(getWordById(+id));
@@ -44,6 +48,13 @@ export default function EditWordForm() {
       setChangedWord(word);
     }
   }, [word, isCreateMode]);
+
+  React.useEffect(() => {
+    if (lastId !== null) {
+      navigate("/word/" + lastId);
+      dispatch(resetLastId());
+    }
+  }, [lastId, navigate, dispatch]);
 
   React.useEffect(() => {
     if (word === undefined && !isCreateMode) {
@@ -60,7 +71,7 @@ export default function EditWordForm() {
     if (isCreateMode) {
       dispatch(addWord(changedWord));
       // @TODO: remove this redirect after implementing redirect to the new word card
-      navigate("/vocabulary");
+      // navigate("/vocabulary");
     } else {
       dispatch(updateWord(changedWord));
       navigate("/word/" + id);

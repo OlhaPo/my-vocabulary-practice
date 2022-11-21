@@ -40,9 +40,14 @@ export const vocabularySlice = createSlice({
     addWord: (state, action) => {
       const lastIndex = state.data.length - 1;
       const lastItem = state.data[lastIndex];
-      state.data.push({ ...action.payload, id: lastItem.id + 1 });
-      // @TODO: save new id to state.lastCreatedId
+      const newWordId = lastItem.id + 1;
+      state.data.push({ ...action.payload, id: newWordId });
+      state.lastCreatedId = newWordId;
       saveToLocalStorage(state.data);
+      return state;
+    },
+    resetLastId: (state) => {
+      state.lastCreatedId = null;
       return state;
     },
     deleteWordAction: (state, action) => {
@@ -72,6 +77,10 @@ export const getRandomWord = (state) => {
   return state.vocabulary.randomWord;
 };
 
+export const getLastCreatedId = (state) => {
+  return state.vocabulary.lastCreatedId;
+};
+
 function saveToLocalStorage(data) {
   localStorage.setItem("vocabulary", JSON.stringify(data));
 }
@@ -95,7 +104,12 @@ function getRandomElement(array) {
   return array[randomIndex];
 }
 
-export const { addWord, deleteWordAction, updateWord, getRandomWordAction } =
-  vocabularySlice.actions;
+export const {
+  addWord,
+  deleteWordAction,
+  updateWord,
+  getRandomWordAction,
+  resetLastId,
+} = vocabularySlice.actions;
 
 export default vocabularySlice.reducer;
