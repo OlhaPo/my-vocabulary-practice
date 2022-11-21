@@ -63,7 +63,7 @@ export default function FlashCard() {
             size="small"
             sx={{
               fontSize: 10,
-              mb: "20px",
+              m: "30px 0",
             }}
             onClick={flipCard}
           >
