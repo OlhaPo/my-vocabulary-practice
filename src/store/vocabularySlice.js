@@ -56,7 +56,12 @@ export const vocabularySlice = createSlice({
       return state;
     },
     updateWord: (state, action) => {
-      // @TODO: implement
+      state.data = state.data.map((word) => {
+        if (word.id === action.payload.id) {
+          word = action.payload;
+        }
+        return word;
+      });
       saveToLocalStorage(state.data);
       return state;
     },
