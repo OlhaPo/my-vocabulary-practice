@@ -26,11 +26,10 @@ export default function EditWordForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [dialogState, setDialogState] = React.useState({ isOpen: false });
-  // const [formErrors, setFormErrors] = React.useState({
-  // value_ua: "",
-  // value_pl: "",
-  // description: "",
-  // });
+  const [formErrors, setFormErrors] = React.useState({
+    value_ua: "",
+    value_pl: "",
+  });
   const [changedWord, setChangedWord] = React.useState({
     value_ua: "",
     value_pl: "",
@@ -67,11 +66,8 @@ export default function EditWordForm() {
   };
 
   const saveWord = () => {
-    // @TODO: add validity checks
     if (isCreateMode) {
       dispatch(addWord(changedWord));
-      // @TODO: remove this redirect after implementing redirect to the new word card
-      // navigate("/vocabulary");
     } else {
       dispatch(updateWord(changedWord));
       navigate("/word/" + id);
@@ -100,7 +96,7 @@ export default function EditWordForm() {
     if (hasChanges) {
       setDialogState({
         isOpen: true,
-        title: "Вилучити зміни?",
+        title: "Скасувати зміни і повернутися до словника?",
         onYes: cancelWord,
         onNo: closeDialog,
       });
@@ -109,11 +105,24 @@ export default function EditWordForm() {
     }
   };
 
+  const validateField = (fieldName, value) => {
+    let formErrorMsg = "";
+    if ((fieldName === "value_ua" || fieldName === "value_pl") && !value) {
+      formErrorMsg = "Поле не може бути порожнім";
+    }
+    setFormErrors({ ...formErrors, [fieldName]: formErrorMsg });
+  };
+
   const handleUserInput = (e) => {
     setHasChanges(true);
     const fieldName = e.target.name;
     const newValue = e.target.value;
     setChangedWord({ ...changedWord, [fieldName]: newValue });
+    validateField(fieldName, newValue);
+  };
+
+  const isOkDisabled = () => {
+    return formErrors.value_pl !== "" || formErrors.value_ua !== "";
   };
 
   return (
@@ -138,7 +147,10 @@ export default function EditWordForm() {
             name="value_ua"
             value={changedWord.value_ua}
             onChange={handleUserInput}
+            error={formErrors.value_ua !== ""}
+            helperText={formErrors.value_ua}
           />
+          {formErrors.value_ua}
         </div>
 
         <div>
@@ -151,6 +163,8 @@ export default function EditWordForm() {
             name="value_pl"
             value={changedWord.value_pl}
             onChange={handleUserInput}
+            error={formErrors.value_pl !== ""}
+            helperText={formErrors.value_pl}
           />
         </div>
         <div>
@@ -199,6 +213,7 @@ export default function EditWordForm() {
               }}
               startIcon={<DoneIcon />}
               onClick={saveWord}
+              disabled={isOkDisabled()}
             >
               Ok
             </Button>
